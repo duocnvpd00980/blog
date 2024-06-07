@@ -5,7 +5,24 @@ const withNextIntl = createNextIntlPlugin()
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['www.shutterstock.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.shutterstock.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'photo.znews.vn',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.dribbble.com',
+      },
+      {
+        protocol: 'http',
+        hostname: 'res.cloudinary.com',
+      },
+    ],
   },
 }
 

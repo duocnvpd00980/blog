@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 export interface FetchResponse<T> {
-  data: T[]
+  data: T
 }
 
 const instance = axios.create({
@@ -16,10 +16,14 @@ class APIClient<T> {
     this.endpoint = endpoint
   }
 
-  findMany = (config: AxiosRequestConfig) =>
+  findMany = (store: (data: T) => void) => (config: AxiosRequestConfig) =>
     instance
       .get<FetchResponse<T>>(this.endpoint, config)
-      .then((res) => res.data)
+      .then((res: AxiosResponse<FetchResponse<T>>) => {
+        store(res.data as T)
+        console.log(res.data)
+        return res.data ?? []
+      })
       .catch((err) => console.log(err))
 
   findOne = (id: number | string) =>

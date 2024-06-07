@@ -17,7 +17,6 @@ const FooterStyled = styled.div`
 const Footer = () => {
   return (
     <FooterStyled>
-      <hr className="border border-primary" />
       <p>© 2024, All Rights Reserved</p>
     </FooterStyled>
   )

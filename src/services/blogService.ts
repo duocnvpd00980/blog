@@ -1,6 +1,6 @@
 import APIClient from './apiClient'
 
-export interface IBlogs {
+export interface IBlog {
   createdAt: string
   title: string
   image: string
@@ -9,4 +9,4 @@ export interface IBlogs {
   description: string
 }
 
-export default new APIClient<IBlogs[]>('blogs')
+export default new APIClient<IBlog[]>('blogs')

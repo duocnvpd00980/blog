@@ -1,14 +1,15 @@
+'use client'
 import MediaList from '@/components/MediaList'
 import BlogItem from './BlogItem'
+import { useBlogStore } from '@/store/useBlogStore'
 
 const BlogList = () => {
+  const blogs = useBlogStore((state) => state.blog.ids)
   return (
     <MediaList>
-      <BlogItem />
-      <BlogItem />
-      <BlogItem />
-      <BlogItem />
-      <BlogItem />
+      {blogs.map((blogId, index) => (
+        <BlogItem index={index} key={blogId} />
+      ))}
     </MediaList>
   )
 }
