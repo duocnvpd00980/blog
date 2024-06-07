@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React, { ReactNode } from 'react'
 import Button from './Button'
-import Submit from './Form/Submit'
+import Submit from './FormSubmit'
 
 interface Props {
   show: boolean

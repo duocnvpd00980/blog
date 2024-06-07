@@ -4,7 +4,6 @@ const BlogHeading = () => {
   return (
     <>
       <DisplayHeading>BLOG</DisplayHeading>
-      <hr className="border border-primary" />
     </>
   )
 }

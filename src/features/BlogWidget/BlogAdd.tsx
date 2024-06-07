@@ -1,35 +1,42 @@
-import FormInput from '@/components/Form/FormInput'
+import FormEditor from '@/components/FormEditor'
+import FormInput from '@/components/FormInput'
 import Modal from '@/components/Modal'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import 'react-quill/dist/quill.snow.css'
+import { BlogFormData, blogSchema } from '@/components/validationSchema'
+import { useBlogAPIs } from '@/hooks/useBlogAPIs'
 
 interface Props {
   modal: {
     isModal: boolean
     handleModalOpen: () => void
-    handleModelClose: () => void
+    handleModalClose: () => void
   }
-}
-
-type FormData = {
-  title: string
-  image: string
-  description: string
-  content: string
 }
 
 const BlogAdd = ({ modal }: Props) => {
   const {
     register,
+    control,
+    reset,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormData>()
-  const onSubmit = handleSubmit((data) => console.log(data))
-
+  } = useForm<BlogFormData>({
+    resolver: zodResolver(blogSchema),
+  })
+  const { useUpdateOne } = useBlogAPIs()
+  const mutate = useUpdateOne()
+  const onSubmit = (data: BlogFormData) => {
+    mutate.mutate(data)
+    reset()
+    modal.handleModalClose()
+  }
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Modal
         show={modal.isModal}
-        onClose={modal.handleModelClose}
+        onClose={modal.handleModalClose}
         title="Add new blog"
       >
         <FormInput
@@ -50,12 +57,7 @@ const BlogAdd = ({ modal }: Props) => {
           register={register}
           errors={errors}
         />
-        <FormInput
-          label="Content"
-          name="content"
-          register={register}
-          errors={errors}
-        />
+        <FormEditor control={control} errors={errors} />
       </Modal>
     </form>
   )

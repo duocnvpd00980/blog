@@ -13,6 +13,6 @@ export const useBlogs = () => {
   return {
     isModal: modal,
     handleModalOpen: () => setModal(true),
-    handleModelClose: () => setModal(false),
+    handleModalClose: () => setModal(false),
   }
 }

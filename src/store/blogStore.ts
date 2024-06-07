@@ -4,7 +4,7 @@ import { IBlog } from '@/services/blogService'
 
 export interface IDocument {
   data: IBlog[]
-  ids: string[]
+  ids: (string | undefined)[]
 }
 export type ICollection = 'blog'
 
@@ -19,7 +19,7 @@ export const blogStore = (collection: ICollection, callback: Store) => {
     (document) => {
       const equal = _.isEqual(document, documentStore)
       let data: IBlog[] = document.data
-      let ids: string[] = document.ids
+      let ids: (string | undefined)[] = document.ids
       if (equal) return
       if (
         !Array.isArray(data) ||
@@ -29,7 +29,10 @@ export const blogStore = (collection: ICollection, callback: Store) => {
         ids = [...documentStore.ids, ...document.ids]
       }
       setState({
-        [collection]: { data, ids },
+        [collection]: {
+          data,
+          ids: ids.filter((id): id is string => id !== undefined),
+        },
       })
     },
   )
