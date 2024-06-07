@@ -10,7 +10,7 @@ export type ICollection = 'blog'
 
 type Store = (get: () => void, set: (document: IDocument) => void) => void
 
-export const useStateStore = (collection: ICollection, callback: Store) => {
+export const blogStore = (collection: ICollection, callback: Store) => {
   const { setState, getState } = useBlogStore
   const documents = getState()
   const documentStore = documents[collection]

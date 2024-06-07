@@ -1,13 +1,13 @@
 import ms from 'ms'
 import { useQuery } from '@tanstack/react-query'
 import blogService, { IBlog } from '@/services/blogService'
-import { useStateStore } from '@/store/useStateStore'
+import { blogStore } from '@/store/blogStore'
 
 export const useBlogAPIs = () => {
   return useQuery({
     queryKey: ['blogs'],
     queryFn: blogService.findMany((data: IBlog[]) => {
-      useStateStore('blog', (get, set) => {
+      blogStore('blog', (get, set) => {
         const ids = data.map((item) => item.id) ?? []
         set({ data, ids })
       })

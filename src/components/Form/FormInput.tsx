@@ -15,9 +15,7 @@ const FormInput = ({ name, label, register, errors }: Props) => (
       className={`form-control ${errors[name] ? 'is-invalid' : ''}`}
     />
     {errors[name]?.type === 'required' && (
-      <small className="form-text text-danger">
-        {name} is required
-      </small>
+      <small className="form-text text-danger">{name} is required</small>
     )}
   </div>
 )

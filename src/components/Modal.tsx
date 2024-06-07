@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode } from 'react'
 import Button from './Button'
 import Submit from './Form/Submit'
 
