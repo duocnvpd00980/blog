@@ -11,7 +11,7 @@ const BogStickyBar = () => {
     <>
       <StickyBar>
         <Button onPress={modal.handleModalOpen} color="primary">
-          Add New
+          Add New 1
         </Button>
         <Search />
       </StickyBar>
