@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import 'normalize.css'
 import './globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Inter } from 'next/font/google'
