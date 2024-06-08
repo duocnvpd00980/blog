@@ -8,6 +8,7 @@ interface Props {
 const StickyBarStyled = styled.nav`
   position: sticky;
   top: 0;
+  z-index: 99999 !important
 `
 
 const StickyBar = ({ children }: Props) => {
