@@ -11,10 +11,12 @@ export const useBlogs = () => {
   const [textSort, setTextSort] = useState('Sort Ascending')
   const queryClient = useQueryClient()
   useEffect(() => {
-    document.body.style.overflow = modal ? 'hidden' : 'auto'
-    document.body.style.marginRight = modal ? '17px' : '0px'
-    return () => {
-      document.body.style.overflow = 'auto'
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = modal ? 'hidden' : 'auto'
+      document.body.style.marginRight = modal ? '17px' : '0px'
+      return () => {
+        document.body.style.overflow = 'auto'
+      }
     }
   }, [modal])
   return {

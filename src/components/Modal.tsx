@@ -1,3 +1,4 @@
+'use client'
 import styled from '@emotion/styled'
 import React, { ReactNode } from 'react'
 import Button from './Button'
@@ -23,6 +24,7 @@ const ModalStyled = styled.div`
   justify-content: center;
   align-items: center;
   background-color: hsl(0, 0%, 20%, 0.3);
+  z-index: 999999 !important;
   .modal-dialog {
     width: 100%;
     max-width: 51.25rem;
@@ -33,7 +35,7 @@ const Modal = ({ show, onClose, title, children }: Props) => {
   if (!show) return null
   return (
     <ModalStyled>
-      <div className="modal-dialog" role="document">
+      <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{title}</h5>

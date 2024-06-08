@@ -5,8 +5,8 @@ export interface FetchResponse<T> {
 }
 
 const instance = axios.create({
-  // baseURL: 'https://5f55a98f39221c00167fb11a.mockapi.io/',
-  baseURL: 'https://663983fe1ae792804bec013c.mockapi.io/api/',
+  baseURL: 'https://5f55a98f39221c00167fb11a.mockapi.io/',
+  //baseURL: 'https://663983fe1ae792804bec013c.mockapi.io/api/',
   headers: { 'X-Custom-Header': 'foobar' },
 })
 

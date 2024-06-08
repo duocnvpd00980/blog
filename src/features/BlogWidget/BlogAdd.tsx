@@ -1,3 +1,4 @@
+'use client'
 import FormEditor from '@/components/FormEditor'
 import FormInput from '@/components/FormInput'
 import Modal from '@/components/Modal'
