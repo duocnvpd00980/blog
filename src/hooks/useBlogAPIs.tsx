@@ -1,46 +1,48 @@
-import ms from 'ms'
 import blogService, { IBlog } from '@/services/blogService'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
 import { toast } from 'react-toastify'
-import { blogStore } from '@/store/blogStore'
-
-interface FetchBlogsParams {
-  page?: number
-  limit?: number
-  sortBy?: string
-  order?: 'asc' | 'desc'
-  search?: string
-}
+import { useShallow } from 'zustand/react/shallow'
+import { useStores } from '@/store/useStores'
+import { IBlogSlice } from '@/store/blogSlice'
 
 export const useBlogAPIs = () => {
+  const { blog, setData } = useStores<IBlogSlice>(useShallow((state) => state))
+  const queryClient = useQueryClient()
+  const payload = {
+    params: {
+      page: blog.page,
+      limit: blog.limit,
+      sortBy: blog.sortBy,
+      order: blog.sortOrder,
+      search: blog.searchText,
+    },
+  }
+
   return {
-    useFindMany: (
-      limit = 3,
-      page = 1,
-      sortBy = 'id',
-      order = 'asc',
-      search = '',
-    ) =>
+    useFindMany: () =>
       useQuery({
-        queryKey: ['blogs'],
-        queryFn: blogService.findMany(
-          {
-            params: {
-              page,
-              limit,
-              sortBy,
-              order,
-              search,
-            },
-          },
-          (data: IBlog[]) => {
-            blogStore('blog', (_get, set) => {
-              const ids = data.map((item) => item.id) ?? []
-              set({ data, ids })
-            })
-          },
-        ),
-        staleTime: ms('4h'),
+        queryKey: [
+          'blogs',
+          blog.page,
+          blog.limit,
+          blog.sortBy,
+          blog.sortOrder,
+          blog.searchText,
+        ],
+        queryFn: blogService.findMany(payload, (data: IBlog[]) => {
+          queryClient.refetchQueries({
+            queryKey: ['blogs'],
+            type: 'active',
+          })
+          setData(data)
+        }),
+        placeholderData: keepPreviousData,
+        refetchOnWindowFocus: false,
       }),
     useUpdateOne: () =>
       useMutation({

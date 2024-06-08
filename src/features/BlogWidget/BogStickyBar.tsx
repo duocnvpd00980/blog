@@ -6,16 +6,22 @@ import { useBlogs } from '@/hooks/useBlogs'
 import BlogAdd from './BlogAdd'
 
 const BogStickyBar = () => {
-  const modal = useBlogs()
+  const blog = useBlogs()
   return (
     <>
       <StickyBar>
-        <Button onPress={modal.handleModalOpen} color="primary">
-          Add New 1
+        <Button onPress={blog.handleModalOpen} color="primary">
+          Add New
         </Button>
-        <Search />
+        <Button onPress={blog.handleModalSortOrder} color="secondary" outline>
+          {blog.textSort}
+        </Button>
+        <Search
+          onSearch={blog.handleModalSearch}
+          onValue={blog.changeSearchText}
+        />
       </StickyBar>
-      <BlogAdd modal={modal} />
+      <BlogAdd modal={blog} />
     </>
   )
 }

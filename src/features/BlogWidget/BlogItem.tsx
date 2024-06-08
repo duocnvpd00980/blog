@@ -1,10 +1,10 @@
 import MediaObject from '@/components/MediaObject'
-import { useBlogStore } from '@/store/useBlogStore'
+import { useStores } from '@/store/useStores'
 interface Props {
   index: number
 }
 const BlogItem = ({ index }: Props) => {
-  const blog = useBlogStore((state) => state.blog.data[index])
+  const blog = useStores((state) => state.blog.data[index])
   return <MediaObject data={blog} />
 }
 

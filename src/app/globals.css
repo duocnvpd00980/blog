@@ -22,3 +22,17 @@ img {
   max-width: 100%;
   vertical-align: top;
 }
+
+.btn-none {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  background-color: transparent;
+  display: inline-block;
+}
+
+.btn-disabled {
+  pointer-events: none !important;
+  opacity: 0.4 !important;
+}

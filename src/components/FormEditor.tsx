@@ -5,7 +5,7 @@ import 'react-quill/dist/quill.snow.css'
 
 const ReactQuillStyled = styled(ReactQuill)`
   .ql-editor {
-    height: 17.5rem;
+    height: 10rem;
     overflow-y: scroll;
   }
 `

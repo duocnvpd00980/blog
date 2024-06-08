@@ -22,14 +22,14 @@ class APIClient<T> {
       .get<FetchResponse<T>>(this.endpoint, config)
       .then((res: AxiosResponse<FetchResponse<T>>) => {
         store(res.data as unknown as T[])
-        console.log(res.data)
-        return res.data ?? []
+        return res.data
       })
-      .catch((err) => console.log(err))
 
   updateOne = (data: T) => {
     return instance.post<T>(this.endpoint, data).then((res) => res.data)
   }
+  findOne = (id: string | number) => () =>
+    instance.get<T>(this.endpoint + `/${id}`).then((res) => res.data)
 }
 
 export default APIClient

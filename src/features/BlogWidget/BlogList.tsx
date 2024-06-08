@@ -1,16 +1,20 @@
 'use client'
 import MediaList from '@/components/MediaList'
 import BlogItem from './BlogItem'
-import { useBlogStore } from '@/store/useBlogStore'
+import { useStores } from '@/store/useStores'
+import BlogPagination from './BlogPagination'
 
 const BlogList = () => {
-  const blogs = useBlogStore((state) => state.blog.ids)
+  const blogs = useStores((state) => state.blog.data)
   return (
-    <MediaList>
-      {blogs.map((blogId, index) => (
-        <BlogItem index={index} key={blogId} />
-      ))}
-    </MediaList>
+    <>
+      <MediaList>
+        {blogs.map((blogId, index) => (
+          <BlogItem index={index} key={index} />
+        ))}
+      </MediaList>
+      <BlogPagination />
+    </>
   )
 }
 

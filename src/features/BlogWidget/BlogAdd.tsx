@@ -4,7 +4,7 @@ import Modal from '@/components/Modal'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import 'react-quill/dist/quill.snow.css'
-import { BlogFormData, blogSchema } from '@/components/validationSchema'
+import { BlogFormData, blogSchema } from '@/validationSchema'
 import { useBlogAPIs } from '@/hooks/useBlogAPIs'
 
 interface Props {

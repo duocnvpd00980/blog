@@ -1,5 +1,5 @@
-import BlogDetail from '@/features/BlogWidget/BlogDetail'
+import BlogDetailWidget from '@/features/BlogDetailWidget'
 
 export default function Page({ params }: { params: { id: string } }) {
-  return <BlogDetail id={params.id} />
+  return <BlogDetailWidget id={params.id} />
 }
